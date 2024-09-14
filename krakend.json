@@ -1,0 +1,507 @@
+{
+  "$schema": "https://www.krakend.io/schema/v2.7/krakend.json",
+  "version": 3,
+  "timeout": "10s",
+  "extra_config": {
+    "router": {
+      "return_error_msg": true
+    }
+  },
+  "endpoints": [
+    {
+      "endpoint": "/apis/users/register",
+      "method": "POST",
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 5000
+        }
+      },
+      "backend": [
+        {
+          "host": [
+            "http://localhost:3000"
+          ],
+          "method": "POST",
+          "url_pattern": "/users/register",
+          "extra_config": {
+            "qos/ratelimit/proxy": {
+              "max_rate": 100,
+              "capacity": 1
+            },
+            "backend/http": {
+              "return_error_code": true
+            }
+          },
+          "input_headers": [
+            "*"
+          ],
+          "input_query_strings": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/apis/users/",
+      "method": "GET",
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 5000
+        }
+      },
+      "backend": [
+        {
+          "host": [
+            "http://localhost:3000"
+          ],
+          "method": "GET",
+          "url_pattern": "/users/",
+          "extra_config": {
+            "qos/ratelimit/proxy": {
+              "max_rate": 100,
+              "capacity": 1
+            },
+            "backend/http": {
+              "return_error_code": true
+            }
+          },
+          "input_headers": [
+            "*"
+          ],
+          "input_query_strings": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/apis/users/login",
+      "method": "POST",
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 5000
+        }
+      },
+      "backend": [
+        {
+          "host": [
+            "http://localhost:3000"
+          ],
+          "method": "POST",
+          "url_pattern": "/users/login",
+          "extra_config": {
+            "qos/ratelimit/proxy": {
+              "max_rate": 100,
+              "capacity": 1
+            },
+            "backend/http": {
+              "return_error_code": true
+            }
+          },
+          "input_headers": [
+            "*"
+          ],
+          "input_query_strings": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/apis/users/me",
+      "method": "GET",
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 5000
+        }
+      },
+      "backend": [
+        {
+          "host": [
+            "http://localhost:3000"
+          ],
+          "method": "GET",
+          "url_pattern": "/users/me",
+          "extra_config": {
+            "qos/ratelimit/proxy": {
+              "max_rate": 100,
+              "capacity": 1
+            },
+            "backend/http": {
+              "return_error_code": true
+            }
+          },
+          "input_headers": [
+            "*"
+          ],
+          "input_query_strings": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/apis/users/update",
+      "method": "PUT",
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 5000
+        }
+      },
+      "backend": [
+        {
+          "host": [
+            "http://localhost:3000"
+          ],
+          "method": "PUT",
+          "url_pattern": "/users/update",
+          "extra_config": {
+            "qos/ratelimit/proxy": {
+              "max_rate": 100,
+              "capacity": 1
+            },
+            "backend/http": {
+              "return_error_code": true
+            }
+          },
+          "input_headers": [
+            "*"
+          ],
+          "input_query_strings": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/apis/assets/create",
+      "method": "POST",
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 5000
+        }
+      },
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "host": [
+            "http://localhost:2000"
+          ],
+          "method": "POST",
+          "url_pattern": "/assets/create",
+          "extra_config": {
+            "qos/ratelimit/proxy": {
+              "max_rate": 100,
+              "capacity": 1
+            },
+            "backend/http": {
+              "return_error_code": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/apis/assets/",
+      "method": "GET",
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 5000
+        }
+      },
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "host": [
+            "http://localhost:2000"
+          ],
+          "method": "GET",
+          "url_pattern": "/assets/",
+          "extra_config": {
+            "qos/ratelimit/proxy": {
+              "max_rate": 100,
+              "capacity": 1
+            },
+            "backend/http": {
+              "return_error_code": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/apis/assets/sell",
+      "method": "POST",
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 5000
+        }
+      },
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "host": [
+            "http://localhost:2000"
+          ],
+          "method": "POST",
+          "url_pattern": "/assets/sell",
+          "extra_config": {
+            "qos/ratelimit/proxy": {
+              "max_rate": 100,
+              "capacity": 1
+            },
+            "backend/http": {
+              "return_error_code": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/apis/assets/buy",
+      "method": "POST",
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 5000
+        }
+      },
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "host": [
+            "http://localhost:2000"
+          ],
+          "method": "POST",
+          "url_pattern": "/assets/buy",
+          "extra_config": {
+            "qos/ratelimit/proxy": {
+              "max_rate": 100,
+              "capacity": 1
+            },
+            "backend/http": {
+              "return_error_code": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/apis/assets/transaction",
+      "method": "POST",
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 5000
+        }
+      },
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "host": [
+            "http://localhost:2000"
+          ],
+          "method": "POST",
+          "url_pattern": "/assets/transaction",
+          "extra_config": {
+            "qos/ratelimit/proxy": {
+              "max_rate": 100,
+              "capacity": 1
+            },
+            "backend/http": {
+              "return_error_code": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/apis/categories",
+      "method": "GET",
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 5000
+        }
+      },
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "host": [
+            "http://localhost:2000"
+          ],
+          "method": "GET",
+          "url_pattern": "/categories",
+          "extra_config": {
+            "qos/ratelimit/proxy": {
+              "max_rate": 100,
+              "capacity": 1
+            },
+            "backend/http": {
+              "return_error_code": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/apis/categories/{category_id}",
+      "method": "GET",
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 5000
+        }
+      },
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "host": [
+            "http://localhost:2000"
+          ],
+          "method": "GET",
+          "url_pattern": "/categories/{category_id}",
+          "extra_config": {
+            "qos/ratelimit/proxy": {
+              "max_rate": 100,
+              "capacity": 1
+            },
+            "backend/http": {
+              "return_error_code": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/apis/categories",
+      "method": "POST",
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 5000
+        }
+      },
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "host": [
+            "http://localhost:2000"
+          ],
+          "method": "POST",
+          "url_pattern": "/categories",
+          "extra_config": {
+            "qos/ratelimit/proxy": {
+              "max_rate": 100,
+              "capacity": 1
+            },
+            "backend/http": {
+              "return_error_code": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/apis/categories/{category_id}",
+      "method": "PUT",
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 5000
+        }
+      },
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "host": [
+            "http://localhost:2000"
+          ],
+          "method": "PUT",
+          "url_pattern": "/categories/{category_id}",
+          "extra_config": {
+            "qos/ratelimit/proxy": {
+              "max_rate": 100,
+              "capacity": 1
+            },
+            "backend/http": {
+              "return_error_code": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/apis/categories/{category_id}",
+      "method": "DELETE",
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 5000
+        }
+      },
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "host": [
+            "http://localhost:2000"
+          ],
+          "method": "DELETE",
+          "url_pattern": "/categories/{category_id}",
+          "extra_config": {
+            "qos/ratelimit/proxy": {
+              "max_rate": 100,
+              "capacity": 1
+            },
+            "backend/http": {
+              "return_error_code": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
